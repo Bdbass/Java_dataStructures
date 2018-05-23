@@ -7,6 +7,6 @@ public interface PriorityQueue<T> {
    int peakPriority();
    boolean isEmpty();
    String toString();
-   void changePriority(T obj);
+   void changePriority(T obj, int value);
    void clear();
 }

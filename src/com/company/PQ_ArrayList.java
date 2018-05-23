@@ -23,7 +23,7 @@ public class PQ_ArrayList<T> implements PriorityQueue{
     public void enqueue(Object obj, int priority) {
         size++;
         // add element at the end of the queue
-        Pair newPair = new Pair(obj, priority);
+        Pair<T, Integer> newPair = new Pair(obj, priority);
         pq.add(newPair);
         // initialize parent and child
         int parent = size/2;
@@ -42,12 +42,17 @@ public class PQ_ArrayList<T> implements PriorityQueue{
         if (head == null) return null;
         //swap first and last element then erase last element
         swap(1, size-1);
+        Remove(1);
+        return head;
+    }
+    private void Remove(int parent){
+        //remove last element and decrement size
         pq.remove(size-1);
         size--;
-        //initalize parent and children
-        int parent = 1;
-        int child1 = 2;
-        int child2 = 3;
+        //initialize children
+        int child1 = parent*2;
+        int child2 = child1+1;
+        // keep moving parent down while it is lower priority than child
         while(child1 > size-1 && child2 > size-1 &&
                 (pq.get(child1).getValue() < pq.get(parent).getValue()) ||
                 pq.get(child2).getValue() < pq.get(parent).getValue()){
@@ -61,12 +66,11 @@ public class PQ_ArrayList<T> implements PriorityQueue{
             child1 = parent*2;
             child2 = child1+1;
         }
-        if (child1 < parent && pq.get(child1).getValue() < pq.get(parent).getValue()){
+        // swap child1 and parent if child1 is lower priority than parent
+        if (child1 < size-1 && pq.get(child1).getValue() < pq.get(parent).getValue()){
             swap(child1,parent);
         }
-        return head;
     }
-
     public Object peak() {
         if (isEmpty()) {
             System.out.println("P-Queue is empty");
@@ -87,9 +91,12 @@ public class PQ_ArrayList<T> implements PriorityQueue{
         return (size<2);
     }
 
-    public void changePriority(Object obj) {
-        Object temp = pq.get(pq.indexOf(obj)).getKey();
-        dequeue();
+    public void changePriority(Object obj, int value) {
+        int parent = pq.indexOf(obj);
+        Object temp = pq.get(parent).getKey();
+        swap(parent, size-1);
+        Remove(parent);
+        enqueue(temp, value);
     }
 
     public void clear() {
