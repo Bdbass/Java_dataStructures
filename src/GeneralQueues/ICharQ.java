@@ -1,4 +1,4 @@
-package com.company;
+package GeneralQueues;
 
 public interface ICharQ {
     //put a character into the queue

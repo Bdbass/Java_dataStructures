@@ -1,7 +1,8 @@
-package com.company;
+package GeneralQueues;
 
 public class Main {
 
+    //Used to test the circular queue
     public static void main(String[] args) {
 	    CircularQueue q1 = new CircularQueue(10);
 	    ICharQ iQ;
@@ -36,4 +37,5 @@ public class Main {
         // showing that it is empty
         System.out.println(iQ.pop());
     }
+
 }

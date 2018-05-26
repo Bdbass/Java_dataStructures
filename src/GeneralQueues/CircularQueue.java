@@ -1,13 +1,13 @@
-package com.company;
+package GeneralQueues;
 
-class CircularQueue implements ICharQ{
+class CircularQueue implements ICharQ {
 
     private char q[];
     private int tail, head, size;
     private boolean start;
 
     //construct queue given size
-    public CircularQueue(int _size){
+    CircularQueue(int _size){
         q = new char[_size+1];
         head = tail = 0;
         size = _size+1;

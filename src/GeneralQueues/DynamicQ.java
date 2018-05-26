@@ -1,6 +1,6 @@
-package com.company;
+package GeneralQueues;
 
-public class DynamicQ implements ICharQ{
+public class DynamicQ implements ICharQ {
     private char queue[] = new char[10];
     private int size = 0;
 
