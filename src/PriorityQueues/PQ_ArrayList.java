@@ -15,7 +15,12 @@ public class  PQ_ArrayList<T> implements IPriorityQueue<T>{
         myPq.enqueue("Ryan3", new myPriority(2));
         myPq.enqueue("Brandon", new myPriority(1));
         System.out.println(myPq.dequeue());
-        System.out.println(myPq.peak());
+        System.out.println(myPq.dequeue());
+        myPq.enqueue("Dora", new myPriority(1));
+        myPq.enqueue("Ryan4" , new myPriority(2));
+        System.out.println(myPq.dequeue());
+        System.out.println(myPq.dequeue());
+
     }
 
     //class fields
@@ -44,8 +49,8 @@ public class  PQ_ArrayList<T> implements IPriorityQueue<T>{
         // initialize parent and child
         int parent = size/2;
         int child = size;
-        //while child priority is less than parent prio. swap them
-        while(parent > 0 && HigherPriority(pq.get(parent).getValue() , pq.get(child).getValue())){
+        //while child is Higher Priority than parent swap
+        while(parent > 0 && HigherPriority(pq.get(child).getValue() , pq.get(parent).getValue())){
             swap(parent, child);
             child = parent;
             parent = child/2;
@@ -69,7 +74,7 @@ public class  PQ_ArrayList<T> implements IPriorityQueue<T>{
         //initialize children
         int child1 = parent*2;
         int child2 = child1+1;
-        // keep moving parent down while it is lower priority than child
+        // keep moving parent down while it is higher priority than child
         while(child1 <= size && child2 <= size &&
                 (HigherPriority(pq.get(child1).getValue(), pq.get(parent).getValue()) ||
                         HigherPriority(pq.get(child2).getValue(), pq.get(parent).getValue()))){
@@ -126,6 +131,6 @@ public class  PQ_ArrayList<T> implements IPriorityQueue<T>{
     public boolean HigherPriority(myPriority P1, myPriority P2) {
         if (P1.Value< P2.Value) return true;
         if (P1.Value > P2.Value) return false;
-        return (P1.date.before(P2.date));
+        return (P1.date < (P2.date));
     }
 }
